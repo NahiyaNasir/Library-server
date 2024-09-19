@@ -1,7 +1,12 @@
 const mongoose = require("mongoose");
 
-const BookingSchema = new mongoose.Schema(
+const BookSchema = new mongoose.Schema(
   {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+     
+    },
+
     title: { type: String, required: true },
     author: { type: String, required: true },
     isAvailable: { type: Boolean, default: true },
@@ -10,4 +15,4 @@ const BookingSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-module.exports = mongoose.model("user", BookingSchema);
+module.exports = mongoose.model("books", BookSchema);

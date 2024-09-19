@@ -1,5 +1,6 @@
 
 const mongoose= require("mongoose")
+const UserSchemaMethod = require("./userSchemaMethod")
 
  const UserSchema= new  mongoose.Schema({
      name:{
@@ -21,4 +22,5 @@ const mongoose= require("mongoose")
  },{
     timestamps:true
  })
+ UserSchemaMethod(UserSchema)
   module.exports= mongoose.model('user',UserSchema)
