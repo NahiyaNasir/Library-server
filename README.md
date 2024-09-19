@@ -109,6 +109,16 @@ http://localhost:5000/api/bookings/borrowBook/:id
 in header 
 
 Content-Type: application/json
-Authorization: Bearer [The token from login response]
+Authorization: cookie.token
 
 ```
+
+###  returnsBooks  route of the user 
+- **POST** request for booking route
+```
+http://localhost:5000/api/bookings/returnsBooks/:id
+
+in header 
+
+Content-Type: application/json
+Authorization:  cookie.token
