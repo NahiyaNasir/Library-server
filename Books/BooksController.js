@@ -42,16 +42,27 @@ exports.borrowBook = async (req, res) => {
 exports.returnBooks = async (req, res) => {
   try {
     const book = await Book.findById(req.params.id);
-    if (!book && book.isAvailable) {
-      return res.status(404).send("Book not found or already returned");
+
+    // Check if the book exists
+    if (!book) {
+      return res.status(404).send("Book not found");
     }
+
+    // Check if the book is already available 
+    if (book.isAvailable) {
+      return res.status(400).send("Book is already returned");
+    }
+
+    // Mark the book as available
     book.isAvailable = true;
     await book.save();
-    res.send("Book returned successfully");
+
+    res.status(200).send("Book returned successfully");
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
+
 // add books
 exports.addBooks = async (req, res) => {
   const { title, author } = req.body;
