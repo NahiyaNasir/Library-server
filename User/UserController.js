@@ -1,10 +1,11 @@
  const generateToken = require("../Middleware/token");
+const { sendCongratulatoryEmail } = require("../NodeMailer/email");
 const User=require("../User/User")
 
 //    register
 exports.register=async(req,res)=>{
      const {name,email,password}=req.body
-     console.log(req.body);
+   //   console.log(req.body);
      if(!email&&!password)
         return res.status(400).json({message:"email or password not  valid"})
     try {
@@ -14,7 +15,9 @@ exports.register=async(req,res)=>{
             password: password
          })
           await user.save()
-          console.log(user);
+         //  console.log(user);
+           // Send a congratulatory email
+        sendCongratulatoryEmail(email, name);
           res.send("user is registered")
     } catch (error) {
       res.status(400).json({error:error.message});
